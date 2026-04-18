@@ -116,11 +116,42 @@ You cannot feel the fear unless it's concrete. Tell a user story gone wrong. Sho
 
 ---
 
+## The Rule: Never Repeat an Instruction
+
+**If you are repeating yourself, you are not using your tools correctly.**
+
+Every repeating instruction, workflow, validation rule, or behavior should be encoded as a persistent tool within 24 hours. Never tell Claude the same thing twice. Instead:
+
+| Instruction Type | Tool | Where It Lives |
+|---|---|---|
+| **Behavior/Rule** | Hook (shell, prompt, agent) | `.claude/hooks/` |
+| **Reusable Procedure** | Skill | `Plugins/[plugin]/skills/` |
+| **Scheduled Check** | Loop or Cron | CronCreate or `/loop` |
+| **One-time Reminder** | Schedule | ScheduleWakeup |
+| **Decision Logic** | Prompt-based Hook | `.claude/hooks/` |
+| **Entry Point** | Command or Skill | `.claude/commands/` or `Plugins/[plugin]/commands/` |
+
+**Trigger for Action:** The moment you catch yourself repeating an instruction to Claude, stop. Create the tool instead. This is the anti-pattern detector.
+
+---
+
 ## Building Blocks: How to Construct Agents & Roles
 
-Agents and roles are built from three types of mechanisms:
+Agents and roles are built from five types of mechanisms:
 
-### Type 1: Plugins (Action Containers)
+### Type 1: Hooks (Persistent Behavior Rules)
+
+**Hooks** are shell commands, prompt-based evaluations, or agent spawns that execute automatically at lifecycle points. They encode repeating behaviors so you never have to instruct them again.
+
+Examples:
+- Pre-edit hook: Validate the file isn't production config
+- Post-edit hook: Check for contradictions in documentation
+- On-failure hook: Escalate to human with context
+- On-completion hook: Run test suite automatically
+
+Hooks live in `.claude/hooks/` and are defined in `.claude/settings.json` or `CLAUDE.md`.
+
+### Type 2: Plugins (Action Containers)
 
 A **plugin** is a directory that bundles skills, agents, commands, and hooks together.
 
@@ -149,7 +180,17 @@ plugin/
 - **Commands** — CLI entry points (e.g., `/elicit-fear`, `/deploy`, `/validate`)
 - **Hooks** — Event-triggered scripts (pre-commit, post-action, on-failure, etc.)
 
-### Type 2: MCP Servers (External Action Surfaces)
+### Type 3: Loops & Schedules (Persistent Execution)
+
+**Loops and schedules** encode recurring checks, reminders, and monitoring so you don't have to repeat them:
+
+- **Loops** (`/loop`) — Run a prompt repeatedly within a session until condition met (polling, babysitting, monitoring)
+- **Schedules** (`CronCreate`) — Run a prompt on a cron schedule across sessions (daily reports, weekly checks, recurring tasks)
+- **One-shot Schedules** (`ScheduleWakeup`) — Remind yourself at a future time to do something
+
+These capture the "keep checking this" pattern so you never have to ask again.
+
+### Type 4: MCP Servers (External Action Surfaces)
 
 **MCP servers** are external integrations that agents can call.
 
@@ -160,7 +201,7 @@ Examples:
 
 Agents use MCP tools to take action on external systems.
 
-### Type 3: Knowledge Base (Reference & Context)
+### Type 5: Knowledge Base (Reference & Context)
 
 **Knowledge Base documents** are AEO-formatted and meant for reading, not execution.
 
@@ -172,12 +213,15 @@ Agents use MCP tools to take action on external systems.
 | Content Type | Location | Purpose |
 |---|---|---|
 | **Concept/Pattern** | Knowledge Base/ | Teach agents how to think |
-| **Reusable Procedure** | plugin/skills/ | Agents execute this |
-| **Command/Entry Point** | plugin/commands/ | User invokes this |
-| **Event Handler** | plugin/hooks/ | System triggers this |
+| **Reusable Procedure** | Plugins/[plugin]/skills/ | Agents execute this |
+| **Command/Entry Point** | Plugins/[plugin]/commands/ or .claude/commands/ | User invokes this |
+| **Persistent Behavior** | .claude/hooks/ | Auto-executes at lifecycle points |
+| **Recurring Check** | /loop or CronCreate | Polls/monitors automatically |
+| **One-time Reminder** | ScheduleWakeup | Triggers at specific time |
+| **Event Handler** | .claude/hooks/ or plugin/hooks/ | System triggers this |
 | **Plugin Metadata** | plugin/plugin.json | Configure the plugin |
 
-**Rule:** If it's meant to be executed, it lives in a plugin (skill, command, or hook). If it's meant to be read and understood, it lives in Knowledge Base.
+**Rule:** If it's meant to be **executed automatically**, it lives in hooks, loops, schedules, or plugins. If it's meant to be **read and understood**, it lives in Knowledge Base. Never document an instruction that should be automated.
 
 ---
 
