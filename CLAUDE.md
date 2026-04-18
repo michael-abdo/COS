@@ -116,16 +116,68 @@ You cannot feel the fear unless it's concrete. Tell a user story gone wrong. Sho
 
 ---
 
-## Decision Matrix: Which Standard to Use?
+## Building Blocks: How to Construct Agents & Roles
 
-| Content Type | Question | Standard | Format | Example |
-|---|---|---|---|---|
-| **Knowledge document** | Is this a core concept or principle? | AEO | 40-60 word summaries, answer-first, 3+ domain examples, H2/H3 only, tables, FAQ | `Knowledge Base/01-*.md`, `Knowledge Base/02-*.md` |
-| **Procedural content** | Is this a procedure someone invokes? | Skill/Tool | Goal-first, 1 example, action steps, no summaries | `.claude/skills/*.md`, AGENT-PROCEDURES.md |
-| **Agent behavior** | Is this a rule Claude always follows? | Procedure | Imperative voice, decision gates, scannable | AGENT-PROCEDURES.md, hooks |
-| **Code/config** | Is this executable or configuration? | Native format | Language-specific conventions | `.mcp.json`, Python, YAML |
+Agents and roles are built from three types of mechanisms:
 
-**Rule:** If unsure, default to AEO for anything meant to be read and understood, Procedure for anything meant to be executed.
+### Type 1: Plugins (Action Containers)
+
+A **plugin** is a directory that bundles skills, agents, commands, and hooks together.
+
+```
+plugin/
+├── plugin.json              (metadata, version, dependencies)
+├── ROLE.md                  (personality, constraints, decision style)
+├── PROCEDURES.md            (how this role operates)
+├── agents/                  (specialized agents that implement the role)
+│   ├── agent-1.md
+│   └── agent-2.md
+├── skills/                  (reusable procedures agents can call)
+│   ├── skill-1/SKILL.md
+│   └── skill-2/SKILL.md
+├── commands/                (CLI commands that invoke workflows)
+│   ├── command-1.md
+│   └── command-2.md
+└── hooks/                   (event-driven scripts)
+    ├── pre-execution.sh
+    └── post-completion.sh
+```
+
+**Components within a plugin:**
+- **Agents** — Specialized Claude instances with this role (e.g., l2-elicitor, tester, communicator)
+- **Skills** — Reusable, documented procedures (e.g., elicit-fear.md, validate-assertion.md, send-message.md)
+- **Commands** — CLI entry points (e.g., `/elicit-fear`, `/deploy`, `/validate`)
+- **Hooks** — Event-triggered scripts (pre-commit, post-action, on-failure, etc.)
+
+### Type 2: MCP Servers (External Action Surfaces)
+
+**MCP servers** are external integrations that agents can call.
+
+Examples:
+- Universal Communication MCP — send messages (Zoom, email, Slack)
+- PostgreSQL MCP — query/write data
+- Claude-in-Chrome MCP — browser automation
+
+Agents use MCP tools to take action on external systems.
+
+### Type 3: Knowledge Base (Reference & Context)
+
+**Knowledge Base documents** are AEO-formatted and meant for reading, not execution.
+
+- No "procedures" in KB (those live in skills)
+- KB teaches concepts, patterns, examples
+- Agents inherit KB as context for decision-making
+- KB is reference material, not action steps
+
+| Content Type | Location | Purpose |
+|---|---|---|
+| **Concept/Pattern** | Knowledge Base/ | Teach agents how to think |
+| **Reusable Procedure** | plugin/skills/ | Agents execute this |
+| **Command/Entry Point** | plugin/commands/ | User invokes this |
+| **Event Handler** | plugin/hooks/ | System triggers this |
+| **Plugin Metadata** | plugin/plugin.json | Configure the plugin |
+
+**Rule:** If it's meant to be executed, it lives in a plugin (skill, command, or hook). If it's meant to be read and understood, it lives in Knowledge Base.
 
 ---
 
