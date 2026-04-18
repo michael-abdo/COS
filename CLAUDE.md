@@ -357,14 +357,15 @@ The knowledge flows parent → children. Execution authority flows children ← 
 
 Every document in this repo lives in one of four states, representing its maturity and utility. This prevents information from becoming deadweight while preserving useful ideas at every stage.
 
-### The Four States
+### The Five States
 
 | State | Location | Purpose | Status |
 |-------|----------|---------|--------|
 | **Ideation** | `1-Ideation/` | Raw ideas, brainstorming, scratch work, unrefined concepts | Being shaped |
-| **Knowledge Base** | `2-Knowledge Base/` | Finalized AEO-formatted concepts, stable, actively used by agents for reference | Active |
-| **Testing** | `3-Testing/` | Proven patterns by repeated use, battle-tested but not yet finalized or integrated | Validating |
-| **Archive** | `4-Archive/` | Superseded, historical, or no longer current but kept for reference | Inactive |
+| **Testing** | `2-Testing/` | Proven patterns by repeated use, battle-tested but not yet finalized or integrated | Validating |
+| **Knowledge Base** | `3-Knowledge Base/` | Finalized AEO-formatted concepts, stable, actively used by agents for reference | Active |
+| **Plugins** | `4-Plugins/` | Executable skills, commands, hooks, and agents extracted from KB for reuse | Executable |
+| **Archive** | `5-Archive/` | Superseded, historical, or no longer current but kept for reference | Inactive |
 
 ### State Progression
 
@@ -381,9 +382,9 @@ Testing (proven pattern, not yet finalized)
     ↓
 Knowledge Base (stable reference, agents inherit this)
     ↓
-    (referenced 2-3+ times)
+    (extracted as executable skill/command/hook)
     ↓
-Plugin (extracted as executable skill/command/hook)
+Plugins (reusable executable code, agents call this)
 ```
 
 Alternatively, a document moves to Archive when superseded:
@@ -399,21 +400,25 @@ Any state → Archive (when no longer current or relevant)
 
 **Knowledge Base:** Finalized, AEO-formatted reference documents. Agents inherit these as context for decision-making. These are stable, current, and actively used. Every KB document is guaranteed to be findable and meaningful.
 
+**Plugins:** Executable skills, commands, hooks, and agents extracted from Knowledge Base. When a KB concept is used 2-3+ times, extract it as a reusable plugin so agents call it rather than reinvent it. Plugins are the action layer; KB is the reference layer.
+
 **Archive:** Historical documents, superseded approaches, or concepts that were useful but are no longer current. Preserved for reference and context but marked as inactive. Agents do NOT treat these as current guidance.
 
 ### Migration Triggers
 
 - **Ideation → Testing:** Pattern emerges from repeated application. You notice the idea works across multiple scenarios.
 - **Testing → Knowledge Base:** Pattern is stable and ready for AEO format finalization. Write it formally, verify it's generalizable across domains.
-- **Knowledge Base → Plugin:** Concept is referenced in 2+ agents' workflows or extracted as a reusable skill/command/hook.
+- **Knowledge Base → Plugins:** Concept is referenced in 2+ agents' workflows. Extract as reusable skill/command/hook so agents call it instead of reading and reinventing.
 - **Any → Archive:** Superseded by newer approach, or no longer applicable to current work. Keep for historical reference.
 
 ### Why This Matters
 
-**Prevents deadweight:** Every document has a clear purpose. If it's not in one of the four states, it doesn't belong in the repo.
+**Prevents deadweight:** Every document has a clear purpose. If it's not in one of the five states, it doesn't belong in the repo.
 
-**Enables agent inheritance:** Agents know exactly where to look for current guidance (Knowledge Base) vs. historical context (Archive) vs. proof-of-concept (Testing).
+**Enables agent inheritance:** Agents know exactly where to look: Plugins (executable code), Knowledge Base (reference), Testing (proof-of-concept), Archive (historical).
 
-**Supports natural discovery:** Patterns graduate to executable plugins only when they've proven their value. No premature optimization.
+**Separates reference from action:** Knowledge Base teaches agents how to think. Plugins make agents act. This distinction prevents mixing concerns.
+
+**Supports natural discovery:** Patterns graduate to plugins only when they've proven their value across multiple uses. No premature optimization.
 
 **Preserves knowledge:** Archive doesn't mean delete. Historical and superseded ideas remain accessible for context and learning.
