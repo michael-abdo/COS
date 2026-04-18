@@ -1,0 +1,188 @@
+{
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "permissions": {
+    "allow": [
+      "mcp__openclaw__openclaw_browser_status"
+    ],
+    "deny": [
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git reset --hard*)",
+      "Bash(git branch -D*)",
+      "Bash(git clean -fd*)",
+      "Bash(git clean -f*)",
+      "Bash(gh pr merge*)",
+      "Bash(gh pr create*)",
+      "Bash(gh pr comment*)",
+      "Bash(gh issue create*)",
+      "Bash(gh issue comment*)",
+      "Bash(gh issue close*)",
+      "Bash(gh release create*)",
+      "Write(.env)",
+      "Write(.env.*)",
+      "Write(**/.env)",
+      "Write(**/.env.*)",
+      "Edit(.env)",
+      "Edit(.env.*)",
+      "Edit(**/.env)",
+      "Edit(**/.env.*)",
+      "Write(**/*.pem)",
+      "Edit(**/*.pem)",
+      "Write(**/*.key)",
+      "Edit(**/*.key)",
+      "Write(**/credentials.json)",
+      "Edit(**/credentials.json)",
+      "Write(**/service-account*.json)",
+      "Edit(**/service-account*.json)",
+      "Write(.github/workflows/**)",
+      "Edit(.github/workflows/**)",
+      "Write(.gitlab-ci.yml)",
+      "Edit(.gitlab-ci.yml)",
+      "Write(.circleci/**)",
+      "Edit(.circleci/**)",
+      "Write(**/migrations/**)",
+      "Edit(**/migrations/**)",
+      "Bash(curl*hooks.slack.com*)",
+      "Bash(curl*discord.com/api/webhooks*)",
+      "Bash(curl*api.telegram.org*)",
+      "Bash(wget*hooks.slack.com*)",
+      "Bash(wget*discord.com/api/webhooks*)"
+    ],
+    "ask": [
+      "Bash(npm publish*)",
+      "Bash(yarn publish*)",
+      "Bash(pnpm publish*)",
+      "Bash(twine upload*)",
+      "Bash(docker push*)",
+      "Bash(terraform apply*)",
+      "Bash(pulumi up*)",
+      "Bash(kubectl apply*)",
+      "Bash(kubectl delete*)",
+      "Bash(helm install*)",
+      "Bash(helm upgrade*)",
+      "Write(package.json)",
+      "Edit(package.json)",
+      "Write(requirements.txt)",
+      "Edit(requirements.txt)",
+      "Write(go.mod)",
+      "Edit(go.mod)",
+      "Write(Cargo.toml)",
+      "Edit(Cargo.toml)"
+    ],
+    "defaultMode": "plan"
+  },
+  "model": "haiku",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pgrep -f 'postgres-mcp/server.py' | while read pid; do if [ \"$(ps -o etime= -p $pid 2>/dev/null | tr -d ' ' | sed 's/^.*-//' | awk -F: '{if(NF==3)print $1*3600+$2*60+$3;else if(NF==2)print $1*60+$2;else print $1}')\" -gt 120 ] 2>/dev/null; then kill \"$pid\" 2>/dev/null; fi; done; echo '{\"suppressOutput\": true}'",
+            "timeout": 5,
+            "statusMessage": "Cleaning stale MCP processes..."
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/block-destructive-bash.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/detect-secrets.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/detect-prod.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/semgrep-review.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/review-diff.sh"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/inject-uncertainty-prompt.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/log-tool-use.sh"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/ship-logs.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "skill-creator@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": false,
+    "frontend-design@claude-plugins-official": true,
+    "cos-protocol@cos-marketplace": true,
+    "disambiguate@cos-marketplace": true
+  },
+  "extraKnownMarketplaces": {
+    "cos-marketplace": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/Mike/2025-2030/Systems/cognitive-operating-system/cos-marketplace"
+      }
+    }
+  },
+  "effortLevel": "low",
+  "voiceEnabled": false,
+  "skipDangerousModePermissionPrompt": true
+}

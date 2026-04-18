@@ -1,0 +1,44 @@
+{
+  "mcpServers": {
+    "universal": {
+      "command": "/Users/Mike/2025-2030/Systems/communication/universal/.venv/bin/python",
+      "args": [
+        "/Users/Mike/2025-2030/Systems/communication/universal/mcp_server.py"
+      ],
+      "env": {
+        "DATABASE_URL": "postgresql://postgres:mikiel2026@localhost:5433/communications"
+      }
+    },
+    "postgres": {
+      "command": "/Users/Mike/2025-2030/Systems/mcp/postgres-mcp/venv/bin/python",
+      "args": [
+        "/Users/Mike/2025-2030/Systems/mcp/postgres-mcp/server.py"
+      ]
+    },
+    "chrome-bridge": {
+      "command": "/Users/Mike/2025-2030/Systems/vm-claude/.venv/bin/python",
+      "args": [
+        "/Users/Mike/2025-2030/Systems/vm-claude/vm/mcp_server.py"
+      ]
+    },
+    "cdp-chrome": {
+      "command": "/Users/Mike/2025-2030/Systems/vm-claude/.venv/bin/python",
+      "args": [
+        "/Users/Mike/2025-2030/Systems/vm-claude/bridge/cdp_mcp_server.py"
+      ],
+      "env": {
+        "CDP_PORT": "9223"
+      }
+    },
+    "openclaw": {
+      "command": "/Users/Mike/2025-2030/Systems/vm-claude/openclaw_mcp_venv/bin/python",
+      "args": [
+        "/Users/Mike/2025-2030/Systems/vm-claude/openclaw_mcp.py"
+      ],
+      "env": {
+        "CRM_GATEWAY_URL": "http://127.0.0.1:3100",
+        "CRM_GATEWAY_API_KEY": "psk_93fb8b2d93639178f4250321e61cc7f9dcc55f8268bf9ca7f9c47d635a34866b"
+      }
+    }
+  }
+}

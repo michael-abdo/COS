@@ -1,0 +1,51 @@
+# Project-specific Semgrep rules go here. The hook uses registry rule packs by default
+# (p/owasp-top-ten, p/security-audit, p/command-injection, p/insecure-transport).
+#
+# Add custom taint rules below when you need to codify a project-specific
+# source -> sink pattern that the registry packs don't catch.
+#
+# Template (uncomment and edit):
+#
+# rules:
+#   - id: project-untrusted-input-to-shell
+#     languages: [python]
+#     severity: ERROR
+#     message: >-
+#       Untrusted HTTP input flows into a shell/subprocess call. Pass argv as a
+#       list and set shell=False, or validate against a strict allowlist first.
+#     mode: taint
+#     pattern-sources:
+#       - pattern-either:
+#           - pattern: request.$METHOD.get(...)
+#           - pattern: request.form[...]
+#           - pattern: request.args[...]
+#           - pattern: request.json[...]
+#           - pattern: flask.request.$ANY
+#     pattern-sinks:
+#       - pattern-either:
+#           - pattern: subprocess.$F(..., shell=True, ...)
+#           - pattern: os.system(...)
+#           - pattern: os.popen(...)
+#           - pattern: commands.getoutput(...)
+#     pattern-sanitizers:
+#       - pattern: shlex.quote(...)
+#
+#   - id: project-upload-path-to-exec
+#     languages: [python]
+#     severity: ERROR
+#     message: >-
+#       A path derived from an upload flows into an executable sink. Never exec
+#       on upload paths; copy to a sandboxed location and validate the contents
+#       first.
+#     mode: taint
+#     pattern-sources:
+#       - pattern-either:
+#           - pattern: $F.save($PATH)
+#           - pattern: werkzeug.utils.secure_filename(...)
+#           - pattern: request.files[...].filename
+#     pattern-sinks:
+#       - pattern-either:
+#           - pattern: subprocess.$F($PATH, ...)
+#           - pattern: os.execv(...)
+#           - pattern: os.execvp(...)
+#           - pattern: os.spawn$ANY(...)

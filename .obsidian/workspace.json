@@ -1,0 +1,228 @@
+{
+  "main": {
+    "id": "966ac5242dc46e54",
+    "type": "split",
+    "children": [
+      {
+        "id": "52719f0fa0d0a48b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cda08d39ac762f50",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COS-L2-L5-CONCERNS.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "COS-L2-L5-CONCERNS"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "996afbd8786bcdc9",
+    "type": "split",
+    "children": [
+      {
+        "id": "2c53ca98cad282ee",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3784b1bcf3b8c9a1",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": true
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "270a94e61c9c5c84",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "07bf213b30d656ba",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "bb7dc9c72870f55e",
+    "type": "split",
+    "children": [
+      {
+        "id": "fcfed3fa86151cfe",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bdce27c22a112a1f",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "COS-L2-L5-CONCERNS.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for COS-L2-L5-CONCERNS"
+            }
+          },
+          {
+            "id": "7f35b6a5bb1f00c6",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "COS-L2-L5-CONCERNS.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from COS-L2-L5-CONCERNS"
+            }
+          },
+          {
+            "id": "da7233e15e903d44",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "b93107af0eab09af",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "013e4702e671590d",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "COS-L2-L5-CONCERNS.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of COS-L2-L5-CONCERNS"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "3784b1bcf3b8c9a1",
+  "lastOpenFiles": [
+    "AGENT-PROCEDURES.md",
+    "AEO-vs-PLUGIN-BEST-PRACTICES.md",
+    "CLAUDE.md",
+    "IDEAL-EMPLOYEE-AGENT-TOOL.md",
+    "Knowledge Base/00-README.md",
+    "COS-L2-L5-CONCERNS.md",
+    "AGENTIC-OPERATING-SYSTEM.md",
+    "Other",
+    "Knowledge Base",
+    "Tools/AEO-vs-PLUGIN-BEST-PRACTICES.md",
+    "Tools",
+    "Tools/CLAUDE-TOOL-DECISION-GUIDE.md",
+    "Other/archive/Pasted image 20260417050002.png",
+    "Other/archive/Pasted image 20260417044705.png",
+    "Other/archive/Pasted image 20260417043458.png",
+    "Knowledge Base/04-Foundations.md",
+    "Knowledge Base/03-Learning.md",
+    "Knowledge Base/02-Execution.md",
+    "Knowledge Base/01-Knowledge-Base.md",
+    "template/AEO-vs-PLUGIN-BEST-PRACTICES.md",
+    "template/CLAUDE-TOOL-DECISION-GUIDE.md",
+    "template/claude-tool-decision-tree.mmd",
+    "template/CLAUDE.md",
+    "template/template-docs/04-Foundations.md",
+    "template/template-docs/03-Learning.md",
+    "template/template-docs/02-Execution.md",
+    "template/template-docs/01-Knowledge-Base.md",
+    "template/template-docs/00-README.md",
+    "template/README.md",
+    "template/template-docs",
+    "template",
+    "Tools/reference-llm-seo.md",
+    "Other/archive/03-Methodology.md",
+    "Other/archive/02-Knowledge-Systems.md",
+    "Other/archive/01-Risk-and-Uncertainty.md",
+    "USE CASE STORY",
+    "Other/archive",
+    "risk-6-factor-model.mmd",
+    "Other/SORT"
+  ]
+}

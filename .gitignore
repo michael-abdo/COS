@@ -1,0 +1,11 @@
+node_modules/
+__pycache__/
+*.pyc
+.env
+.env.local
+.DS_Store
+*.log
+.claude/logs/
+.claude/skills/
+dist/
+build/

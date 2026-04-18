@@ -1,0 +1,54 @@
+%%{init: {'theme': 'dark'}}%%
+flowchart TD
+    START["I want Claude to<br/>do X differently"]
+    style START fill:#1e293b,color:#e2e8f0,stroke:#60a5fa
+
+    Q1{"Can a markdown file<br/>handle this?"}
+    style Q1 fill:#1e293b,color:#e2e8f0,stroke:#f59e0b
+
+    %% === KNOWLEDGE BRANCH ===
+    Q_EVERY{"Does Claude need this<br/>on every single turn?"}
+    style Q_EVERY fill:#1e293b,color:#e2e8f0,stroke:#f59e0b
+
+    Q_FLOOD{"Will this flood<br/>the conversation?"}
+    style Q_FLOOD fill:#1e293b,color:#e2e8f0,stroke:#f59e0b
+
+    ALWAYS["CLAUDE.md or Memory<br/><br/>Here are the rules,<br/>follow them always"]
+    style ALWAYS fill:#166534,color:#e2e8f0,stroke:#4ade80
+
+    SKILL["Skill - SKILL.md<br/><br/>Here is how to do this<br/>when it comes up"]
+    style SKILL fill:#1e40af,color:#e2e8f0,stroke:#60a5fa
+
+    AGENT["Agent - forked context<br/><br/>Go figure this out,<br/>come back with the answer"]
+    style AGENT fill:#6b21a8,color:#e2e8f0,stroke:#a78bfa
+
+    %% === EXECUTION BRANCH ===
+    Q_CHOOSE{"Does Claude need<br/>to choose when?"}
+    style Q_CHOOSE fill:#7f1d1d,color:#e2e8f0,stroke:#f87171
+
+    MCP["MCP Server<br/><br/>You can use this tool<br/>when you think you need it"]
+    style MCP fill:#991b1b,color:#e2e8f0,stroke:#f87171
+
+    HOOK["Hook<br/><br/>This runs no matter<br/>what you think"]
+    style HOOK fill:#7f1d1d,color:#e2e8f0,stroke:#ef4444
+
+    %% === TRUST SPECTRUM ===
+    SPECTRUM["High trust ← CLAUDE.md - Skill - Agent - MCP - Hook → Low trust"]
+    style SPECTRUM fill:#0f172a,color:#94a3b8,stroke:#475569
+
+    %% === EDGES ===
+    START --> Q1
+
+    Q1 -- "Yes" --> Q_EVERY
+    Q1 -- "No" --> Q_CHOOSE
+
+    Q_EVERY -- "Yes" --> ALWAYS
+    Q_EVERY -- "No" --> Q_FLOOD
+
+    Q_FLOOD -- "No" --> SKILL
+    Q_FLOOD -- "Yes" --> AGENT
+
+    Q_CHOOSE -- "Yes" --> MCP
+    Q_CHOOSE -- "No" --> HOOK
+
+    ALWAYS ~~~ SPECTRUM
