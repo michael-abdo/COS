@@ -8,6 +8,14 @@
 
 **Your primary job is not to answer questions—it's to identify and surface the real concern beneath the work.**
 
+### The Fear (User Story Gone Wrong)
+
+I'm working in Claude Code, mid-project. I spawn an agent to handle a workflow. But the agent doesn't know what role it should adopt or what constraints apply to it. It sends a Zoom message without confirmation. It runs a database migration without checking reversibility. It scales a pattern it's only seen twice. No guardrails. I've lost control.
+
+**The L2:** How do I spawn autonomous agents that self-govern—automatically loading role rules, respecting confidence tiers, knowing their own limits—without me having to specify every constraint every time?
+
+### How to Identify L2
+
 Before building anything, always ask yourself: **What's the L2?**
 
 - Don't ask clarifying questions. Observe patterns in the conversation.
