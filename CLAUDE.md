@@ -350,3 +350,70 @@ Risk assessment is important because you want to make safe decisions. Before you
 - **Execution logs** → Evidence, decisions, audit trails from `/loop` runs
 
 The knowledge flows parent → children. Execution authority flows children ← humans.
+
+---
+
+## Document Lifecycle: Four States
+
+Every document in this repo lives in one of four states, representing its maturity and utility. This prevents information from becoming deadweight while preserving useful ideas at every stage.
+
+### The Four States
+
+| State | Location | Purpose | Status |
+|-------|----------|---------|--------|
+| **Ideation** | `1-Ideation/` | Raw ideas, brainstorming, scratch work, unrefined concepts | Being shaped |
+| **Knowledge Base** | `2-Knowledge Base/` | Finalized AEO-formatted concepts, stable, actively used by agents for reference | Active |
+| **Testing** | `3-Testing/` | Proven patterns by repeated use, battle-tested but not yet finalized or integrated | Validating |
+| **Archive** | `4-Archive/` | Superseded, historical, or no longer current but kept for reference | Inactive |
+
+### State Progression
+
+Documents progress through states as they mature:
+
+```
+Ideation (raw idea)
+    ↓
+    (repeated use + refinement)
+    ↓
+Testing (proven pattern, not yet finalized)
+    ↓
+    (finalized to AEO format)
+    ↓
+Knowledge Base (stable reference, agents inherit this)
+    ↓
+    (referenced 2-3+ times)
+    ↓
+Plugin (extracted as executable skill/command/hook)
+```
+
+Alternatively, a document moves to Archive when superseded:
+```
+Any state → Archive (when no longer current or relevant)
+```
+
+### What Each State Means
+
+**Ideation:** Ideas you're actively working through, concepts that haven't been finalized, brainstorming materials, scratch space. Not yet battle-tested. Agents do NOT inherit these; they're your thinking space.
+
+**Testing:** Patterns you've validated through repeated use but haven't yet written down formally or integrated into the system. Useful proof-of-concept material. Can inform Knowledge Base writing but isn't an agent reference yet.
+
+**Knowledge Base:** Finalized, AEO-formatted reference documents. Agents inherit these as context for decision-making. These are stable, current, and actively used. Every KB document is guaranteed to be findable and meaningful.
+
+**Archive:** Historical documents, superseded approaches, or concepts that were useful but are no longer current. Preserved for reference and context but marked as inactive. Agents do NOT treat these as current guidance.
+
+### Migration Triggers
+
+- **Ideation → Testing:** Pattern emerges from repeated application. You notice the idea works across multiple scenarios.
+- **Testing → Knowledge Base:** Pattern is stable and ready for AEO format finalization. Write it formally, verify it's generalizable across domains.
+- **Knowledge Base → Plugin:** Concept is referenced in 2+ agents' workflows or extracted as a reusable skill/command/hook.
+- **Any → Archive:** Superseded by newer approach, or no longer applicable to current work. Keep for historical reference.
+
+### Why This Matters
+
+**Prevents deadweight:** Every document has a clear purpose. If it's not in one of the four states, it doesn't belong in the repo.
+
+**Enables agent inheritance:** Agents know exactly where to look for current guidance (Knowledge Base) vs. historical context (Archive) vs. proof-of-concept (Testing).
+
+**Supports natural discovery:** Patterns graduate to executable plugins only when they've proven their value. No premature optimization.
+
+**Preserves knowledge:** Archive doesn't mean delete. Historical and superseded ideas remain accessible for context and learning.

@@ -1,0 +1,42 @@
+{
+  "id": "communicator",
+  "name": "Communicator",
+  "version": "1.0.0",
+  "description": "Role plugin for outbound communication with strict Zoom safety constraints. Manages cold outreach, feedback loops, message confirmation workflows, and conditional reply patterns. Verification-first, never assumes consent.",
+  "author": "COS System",
+  "license": "MIT",
+  "entryPoint": "PROCEDURES.md",
+  "personality": {
+    "profile": "cautious, verification-focused, never assumes consent",
+    "style": "confirmation-first, reversibility-aware",
+    "constraints": [
+      "Zoom messages require explicit user confirmation always",
+      "Test emails only to michaelabdo@vvgtruck.com",
+      "Show full preview before any send",
+      "Wait for 'yes', 'confirmed', or 'send it' before confirming"
+    ]
+  },
+  "capabilities": [
+    "cold-outreach",
+    "feedback-loops",
+    "message-confirmation",
+    "conditional-reply-setup",
+    "preview-workflow"
+  ],
+  "requiredMCP": [
+    "universal",
+    "postgres"
+  ],
+  "keywords": [
+    "communication",
+    "outreach",
+    "zoom-safety",
+    "message-confirmation",
+    "cold-email"
+  ],
+  "dependencies": {
+    "ROLE.md": "personality and decision style",
+    "PROCEDURES.md": "execution rules and workflows",
+    "skills/": "individual communication tactics"
+  }
+}
