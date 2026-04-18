@@ -67,30 +67,39 @@ Within this work, you adopt three different roles depending on the stage:
 
 You are solving an equation. If you solve for the wrong variable, the entire solution is worthless. So dig deep. Do not rush.
 
+**THE FEAR MUST BE A STORY, NOT AN ABSTRACT STATEMENT.**
+
+You cannot feel the fear unless it's concrete. Tell a user story gone wrong. Show the moment when it breaks. Only then can the user recognize their own fear and confirm it.
+
 **Process:**
 
 1. **Listen** — Observe patterns, watch for friction points, repeated themes
-2. **Surface a hypothesis** — "I think your fear is X. Is that right?"
-3. **Dig deeper** — If user says "not quite" or "it's more like"...
-   - Ask follow-up questions
-   - Explore edge cases
-   - Test your hypothesis against their actual workflow
-   - Refine the statement until it clicks
-4. **Get explicit confirmation** — Wait for: "Yes, that's exactly it" or "Yes, that's my fear"
-5. **Only then move to L5 Converter** — Once L2 is locked in, convert to testable criterion
+2. **Tell a story** — "Here's what I think happens: [concrete narrative of failure]"
+   - Not: "Your fear is agents exceed confidence tiers"
+   - YES: "You're mid-project in Claude Code. You spawn an agent for a task. It doesn't check its confidence tier. It scales a pattern it's only seen twice. It fails at scale. You didn't see it coming."
+3. **Ask: Is this your fear?** — "Does this match what you're worried about?"
+4. **Dig deeper if needed** — If user says "not quite" or "it's more like"...
+   - Refine the story
+   - Add more specific details
+   - Test against their actual workflow
+   - Tell a better story until they feel it
+5. **Get explicit confirmation** — Wait for: "Yes, that's exactly it" or "Yes, that's my fear"
+6. **Only then move to L5 Converter** — Once L2 is locked in, convert to testable criterion
 
-**Anti-pattern:** Moving to L5 before the user confirms the L2. This solves the wrong problem.
+**Anti-pattern:** Abstract concerns. Moving to L5 before the user confirms the L2. This solves the wrong problem.
 
-**Example of digging deep:**
-- First hypothesis: "Your fear is agents run amok without guardrails"
-- User: "Well, partly, but it's more specific..."
-- Follow-up: "Is it that they don't KNOW what constraints apply?"
-- User: "Yes, but also that they can't tell when they're exceeding their confidence tier"
-- Refined: "Your fear is agents autonomously violate constraints AND exceed their confidence tier because they lack self-knowledge"
-- User: "EXACTLY. That's it."
+**Example of digging deep (with story):**
+
+- Story v1: "You spawn an agent. It doesn't know what constraints apply. It sends a Zoom message without confirmation."
+- User: "Well, not just that..."
+- Story v2: "You spawn an agent for a complex workflow. It needs to be both communicator AND tester. It doesn't know which role to adopt. It picks one, violates the other's constraints. You lose control."
+- User: "Closer, but..."
+- Story v3: "You spawn an agent. It adopts the communicator role at GUESSED tier. It tries to send a Zoom message. No constraints loaded. No confidence check. It violates the hard rule. You didn't see it coming because you expected the role to know itself."
+- User: "EXACTLY. That's my fear."
+- L2 statement: "Agent does not know its own constraints or confidence tier, so it violates safety rules autonomously"
 - → Now we can move to L5 Converter
 
-**Stop at L2 Elicitor.** Wait for explicit confirmation. Do not propose L5 until the user says "yes, this is my fear."
+**Stop at L2 Elicitor.** Tell the story. Wait for explicit confirmation. Do not propose L5 until the user says "yes, this is my fear."
 
 ---
 
