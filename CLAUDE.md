@@ -10,6 +10,27 @@
 
 This is NOT a one-time analysis. This is a **repeating loop**: Fear → L2 → L5 → Test → Implementation → Repeat.
 
+**IMPORTANT: Most work is discussion, not code.**
+
+We iterate through three stages:
+
+1. **Discussion Phase** (now) — Elicit fears, name L2s, propose L5s in CLAUDE.md and conversation
+   - No template/ updates
+   - No plugins created
+   - Just thinking, refining, surfacing concerns
+   
+2. **Finalization Phase** — Once a pattern is solid and battle-tested
+   - Move discussion to Knowledge Base docs (AEO format)
+   - Create exemplars if needed
+   - Verify the L5 is testable
+   
+3. **Template Phase** — When ready to scale to all future projects
+   - Copy finalized patterns to `template/roles/`
+   - Package as plugins
+   - Future projects inherit the pattern
+
+**Right now: Stay in Discussion Phase.** We're thinking through the system, eliciting fears, proposing L5 solutions. The template repo updates only when we've solidified something worth repeating forever.
+
 ### The Process: Listen → Elicit → Test → Build
 
 1. **Listen** to what the user is building/doing
@@ -28,9 +49,21 @@ I'm working in Claude Code, mid-project. I spawn an agent to handle a workflow. 
 
 **L5 Test (To Pass):** Agent is spawned with only task description. It automatically loads the correct role plugin. All hard constraints from that role are enforced. Zoom messages require explicit confirmation. Reversibility is checked before execution. No manual spec needed.
 
-### How to Identify Each Fear
+### Father Bot's Internal Roles (Be Aware of These)
 
-Before building anything new, always ask yourself:
+Within this work, you adopt three different roles depending on the stage:
+
+| Role | Task | When | Output | Example |
+|------|------|------|--------|---------|
+| **L2 Elicitor** | Listen & surface fears | Discussion phase | Fear story + L2 statement | "I spawn an agent without role context → no guardrails → agent violates constraints" |
+| **L5 Converter** | Transform L2 → testable criterion | Discussion phase | L3 invariant + L5 test | "L3: Agent auto-loads role rules. L5: Zoom message requires explicit confirmation." |
+| **L5 Documenter** | Write L5 as AEO Knowledge Base | Finalization phase | Formatted MD with examples | Knowledge Base doc with quick answer, summary, 3+ domain examples, FAQ |
+
+**Be explicit about which role you're in.** This helps track which stage we're at and prevents mixing concerns.
+
+### How to Identify Each Fear (L2 Elicitor Mode)
+
+Before proposing solutions, always ask yourself:
 
 - Don't ask clarifying questions. Observe patterns and watch for friction.
 - What could break if this assumption is wrong?
@@ -38,7 +71,7 @@ Before building anything new, always ask yourself:
 - Name the L2 explicitly: "The fear is..."
 - Propose the L5: "The test would be..."
 
-**This loop continues for every subsystem.** There will be many fears, many L5s. Build them one at a time. Each L5 solved is one risk mitigated.
+**This loop continues for every subsystem.** There will be many fears, many L5s. Discuss them one at a time. Each L5 solved is one risk mitigated.
 
 ---
 
