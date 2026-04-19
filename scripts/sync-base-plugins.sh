@@ -29,6 +29,7 @@ NC='\033[0m' # No Color
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 COS_ROOT="$(dirname "$SCRIPT_DIR")"
 DOMAINS_FILE="$COS_ROOT/domains.txt"
+VERSION_FILE="$COS_ROOT/VERSION"
 
 # Define CRUD managers
 MANAGERS=("create" "read" "update" "delete")
@@ -38,6 +39,15 @@ if [ ! -f "$DOMAINS_FILE" ]; then
     echo -e "${RED}Error: domains.txt not found at $DOMAINS_FILE${NC}"
     exit 1
 fi
+
+# Read current version
+if [ ! -f "$VERSION_FILE" ]; then
+    echo -e "${RED}Error: VERSION file not found at $VERSION_FILE${NC}"
+    exit 1
+fi
+
+CURRENT_VERSION=$(cat "$VERSION_FILE" | xargs)
+echo -e "${BLUE}Current version: $CURRENT_VERSION${NC}"
 
 # Initialize tracking
 SYNC_LOG=""
@@ -169,8 +179,18 @@ git -C "$COS_ROOT" add -A
 if git -C "$COS_ROOT" diff --cached --quiet; then
     echo -e "${YELLOW}No changes to commit${NC}"
 else
-    # Create commit message
-    COMMIT_MSG="sync: Initialize CRUD manager base plugins for all domains
+    # Increment version before commit
+    MAJOR=$(echo "$CURRENT_VERSION" | cut -d. -f1)
+    MINOR=$(echo "$CURRENT_VERSION" | cut -d. -f2)
+    NEW_MINOR=$((MINOR + 1))
+    NEW_VERSION="$MAJOR.$NEW_MINOR"
+
+    # Update VERSION file
+    echo "$NEW_VERSION" > "$VERSION_FILE"
+    git -C "$COS_ROOT" add "$VERSION_FILE"
+
+    # Update commit message with version
+    COMMIT_MSG="sync: Sync base plugins to v$NEW_VERSION
 
 Synced managers:
 "
@@ -198,13 +218,16 @@ Structure created:
 - [domain]/4-plugins/[manager]/global/ - Base plugin files
 - [domain]/4-plugins/[manager]/local/ - Protected for domain customizations
 
-Total: $SYNC_COUNT manager plugins initialized"
+Total: $SYNC_COUNT manager plugins initialized
+
+Version updated: $CURRENT_VERSION → $NEW_VERSION"
 
     # Create git commit
     git -C "$COS_ROOT" commit -m "$COMMIT_MSG"
 
     COMMIT_HASH=$(git -C "$COS_ROOT" rev-parse --short HEAD)
     echo -e "${GREEN}✓ Commit created: $COMMIT_HASH${NC}"
+    echo -e "${GREEN}✓ Version updated: $CURRENT_VERSION → $NEW_VERSION${NC}"
 fi
 
 echo ""
