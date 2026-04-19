@@ -1,0 +1,8 @@
+{
+  "id": "delete-manager",
+  "name": "delete | Manager",
+  "version": "1.0.0",
+  "domain": "consulting",
+  "source": "template-base",
+  "description": "Base delete manager plugin for consulting domain"
+}

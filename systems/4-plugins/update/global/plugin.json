@@ -1,0 +1,8 @@
+{
+  "id": "update-manager",
+  "name": "update | Manager",
+  "version": "1.0.0",
+  "domain": "systems",
+  "source": "template-base",
+  "description": "Base update manager plugin for systems domain"
+}

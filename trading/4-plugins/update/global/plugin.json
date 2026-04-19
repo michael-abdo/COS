@@ -1,0 +1,8 @@
+{
+  "id": "update-manager",
+  "name": "update | Manager",
+  "version": "1.0.0",
+  "domain": "trading",
+  "source": "template-base",
+  "description": "Base update manager plugin for trading domain"
+}

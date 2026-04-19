@@ -1,0 +1,8 @@
+{
+  "id": "read-manager",
+  "name": "read | Manager",
+  "version": "1.0.0",
+  "domain": "systems",
+  "source": "template-base",
+  "description": "Base read manager plugin for systems domain"
+}
